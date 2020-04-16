@@ -1,21 +1,27 @@
-arr = [50, 47, 92, 78, 76, 7, 60, 36, 59, 30, 50, 43]
-def partition(xs, start, end):
-    follower = leader = start
-    while leader < end:
-        if xs[leader] <= xs[end]:
-            xs[follower], xs[leader] = xs[leader], xs[follower]
-            follower += 1
-        leader += 1
-    xs[follower], xs[end] = xs[end], xs[follower]
-    return follower
+def partition(sort_list, low, high):
+    i = (low - 1)
+    pivot = sort_list[high]
+    for j in range(low, high):
+        if sort_list[j] <= pivot:
+            i += 1
+            sort_list[i], sort_list[j] = sort_list[j], sort_list[i]
+    sort_list[i+1], sort_list[high] = sort_list[high], sort_list[i+1]
+    return (i+1)
 
-def _quicksort(xs, start, end):
-    if start >= end:
-        return
-    p = partition(xs, start, end)
-    _quicksort(xs, start, p-1)
-    _quicksort(xs, p+1, end)
-    
-def quicksort(xs):
-    _quicksort(xs, 0, len(xs)-1)
-    xs = [50, 47, 92, 78, 76, 7, 60, 36, 59, 30, 50, 43]
+
+def quick_sort(sort_list, low, high):
+    if low < high:
+        pi = partition(sort_list, low, high)
+        quick_sort(sort_list, low, pi-1)
+        quick_sort(sort_list, pi+1, high)
+
+
+lst = []
+size = int(input("Enter size of the list: "))
+for i in range(size):
+    elements = int(input("Enter an element"))
+    lst.append(elements)
+low = 0
+high = len(lst) - 1
+quick_sort(lst, low, high)
+print(lst)
