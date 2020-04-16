@@ -19,7 +19,7 @@ def quick_sort(sort_list, low, high):
 lst = []
 size = int(input("Enter size of the list: "))
 for i in range(size):
-    elements = int(input("Enter an element"))
+    elements = int(input("Enter an element: "))
     lst.append(elements)
 low = 0
 high = len(lst) - 1
